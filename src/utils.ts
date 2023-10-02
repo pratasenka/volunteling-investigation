@@ -6,17 +6,17 @@ interface UserDataProbability extends UserData {
     probability: number;
 }
 
-const FIXED = 10;
+const FIXED = 2;
 
 const getRandomArbitrary = (min: number, max: number): number => {
-    return random.uniform(min, max)();
+    return Math.random() * (max - min) + min;
 };
 
 export const getUniformRandom = random.uniform(0, 1);
 
 const calculateUserProbabilityCorrection = (userData: UserData): number => {
     const userWinsToRounds: number = userData.wins / userData.rounds || 0;
-    return 1 - (userWinsToRounds !== 1 ? userWinsToRounds : 0.99);
+    return (1 - (userWinsToRounds !== 1 ? userWinsToRounds : 0.99)) ^ 2;
 };
 
 const sortUserProbabilities = (
@@ -72,14 +72,22 @@ export const findWinnerCorrection = (usersData: UserData[]): UserData => {
     else return findWinnerCorrection(usersData);
 };
 
-export const findWinnerNormal = (usersData: UserData[]): UserData => {
+export const findWinnerUniform = (usersData: UserData[]): UserData => {
     const userProbability: number = 1 / usersData.length;
 
     const borderedRandomValue = getUniformRandom();
 
     const winnerIndex: number = usersData.findIndex((userData, index) => {
-        return borderedRandomValue <= userProbability * (index + 1);
+        return (
+            borderedRandomValue <=
+            Number(userProbability.toFixed(FIXED)) * (index + 1)
+        );
     });
 
     return usersData[winnerIndex];
 };
+
+export const findWinners = (
+    usersDataCorrection: UserData[],
+    usersDataUniform: UserData[]
+) => {};
