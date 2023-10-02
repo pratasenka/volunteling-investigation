@@ -32,7 +32,23 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.workplace {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(0, 38, 255);
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  width: 50vw;
 }
