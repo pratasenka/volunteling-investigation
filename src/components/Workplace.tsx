@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import { Chart } from './Chart';
-import { findWinnerCorrection, findWinnerNormal } from '../utils';
+import { findWinnerCorrection, findWinnerUniform } from '../utils';
 
 export interface UserData {
     id: string;
@@ -11,35 +11,38 @@ export interface UserData {
 }
 
 const usersDataCorrection: UserData[] = [];
-const usersDataNormal: UserData[] = [];
+const usersDataUniform: UserData[] = [];
 
-for (let i = 0; i < 20; ++i) {
+const wins = 100;
+const rounds = 1000;
+
+for (let i = 0; i < 5; i++) {
     usersDataCorrection.push({
         id: `#${i}`,
-        wins: 0,
-        rounds: 0,
+        wins: wins * i,
+        rounds: rounds,
     })
 
-    usersDataNormal.push({
+    usersDataUniform.push({
         id: `#${i}`,
-        wins: 0,
-        rounds: 0,
+        wins: wins * i,
+        rounds: rounds,
     })
 }
 
 export const Workplace = () => {
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 100000; i++) {
         const winnerWithCorrection = findWinnerCorrection(usersDataCorrection);
         ++winnerWithCorrection.wins;
         usersDataCorrection.forEach(userData => ++userData.rounds);
 
-        const winnerWithNormal = findWinnerNormal(usersDataNormal);
-        ++winnerWithNormal.wins;
-        usersDataNormal.forEach(userData => ++userData.rounds);
+        const winnerWithUniform = findWinnerUniform(usersDataUniform);
+        ++winnerWithUniform.wins;
+        usersDataUniform.forEach(userData => ++userData.rounds);
     }
 
 
-    console.log(usersDataCorrection, usersDataNormal)
+    console.log(usersDataCorrection, usersDataUniform)
 
 
     const labels = usersDataCorrection.map(userData => userData.id);
@@ -47,8 +50,8 @@ export const Workplace = () => {
         labels,
         datasets: [
             {
-                label: 'Normal Distribution',
-                data: usersDataNormal.map(userData => userData.wins),
+                label: 'Uniform Distribution',
+                data: usersDataUniform.map(userData => userData.wins),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
