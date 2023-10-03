@@ -42,13 +42,12 @@
   display: inline-block;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgb(0, 38, 255);
 }
 
 .chart {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
-  width: 50vw;
+  margin-top: 10vh;
+  width: 70vw;
 }
