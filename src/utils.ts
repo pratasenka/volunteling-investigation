@@ -37,8 +37,8 @@ export const findWinnerCorrection = (
     usersData: UserData[],
     randomValue: number
 ): UserData => {
-    const usersProbability = calculateUsersEqualsProbabilities(usersData);
-    // const usersProbability = calculateUsersProbabilities(usersData);
+    // const usersProbability = calculateUsersEqualsProbabilities(usersData);
+    const usersProbability = calculateUsersProbabilities(usersData);
 
     const sumOfUsersProbailities: number = usersProbability.reduce(
         (acc: number, curr: number) => acc + curr,

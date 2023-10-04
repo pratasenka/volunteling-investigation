@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Chart } from './Chart';
 import { findWinners } from '../utils';
@@ -9,28 +9,32 @@ export interface UserData {
     rounds: number;
 }
 
-const usersDataCorrection: UserData[] = [];
-const usersDataUniform: UserData[] = [];
 
-const wins = 10;
-const rounds = 120;
-
-for (let i = 1; i < 6; i++) {
-    usersDataCorrection.push({
-        id: `#${i}`,
-        wins: i % 2 === 0 ? 0 : wins * i,
-        rounds: rounds,
-    })
-
-    usersDataUniform.push({
-        id: `#${i}`,
-        wins: i % 2 === 0 ? wins : wins * i,
-        rounds: rounds,
-    })
-}
 
 export const Workplace = () => {
-    for (let i = 0; i < 200; i++) {
+    const [users, setUsers] = useState(5);
+    const [wins, setWins] = useState(10);
+    const [rounds, setRounds] = useState(90);
+    const [cycles, setCycles] = useState(10000);
+
+    const usersDataCorrection: UserData[] = [];
+    const usersDataUniform: UserData[] = [];
+
+    for (let i = 0; i < users; i++) {
+        usersDataCorrection.push({
+            id: `#${i+1}`,
+            wins: i % 2 === 0 ? 0 : wins * i,
+            rounds: rounds,
+        })
+
+        usersDataUniform.push({
+            id: `#${i+1}`,
+            wins: i % 2 === 0 ? 0 : wins * i,
+            rounds: rounds,
+        })
+    }
+
+    for (let i = 0; i < cycles; i++) {
         const [winnerWithCorrection, winnerWithUniform] = findWinners(usersDataCorrection, usersDataUniform);
         ++winnerWithCorrection.wins;
         ++winnerWithUniform.wins;
