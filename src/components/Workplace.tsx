@@ -15,20 +15,20 @@ export const Workplace = () => {
     const [users, setUsers] = useState(5);
     const [wins, setWins] = useState(10);
     const [rounds, setRounds] = useState(90);
-    const [cycles, setCycles] = useState(100);
+    const [cycles, setCycles] = useState(50);
 
     const usersDataCorrection: UserData[] = [];
     const usersDataUniform: UserData[] = [];
 
     for (let i = 0; i < users; i++) {
         usersDataCorrection.push({
-            id: `#${i+1}`,
+            id: `#${i + 1}`,
             wins: i % 2 === 0 ? 0 : wins * i,
             rounds: rounds,
         })
 
         usersDataUniform.push({
-            id: `#${i+1}`,
+            id: `#${i + 1}`,
             wins: i % 2 === 0 ? 0 : wins * i,
             rounds: rounds,
         })
@@ -47,7 +47,7 @@ export const Workplace = () => {
         labels,
         datasets: [
             {
-                label: 'Uniform Distribution',
+                label: `Uniform Distribution (diff: ${Math.max(...usersDataUniform.map(userData => userData.wins)) - Math.min(...usersDataUniform.map(userData => userData.wins))})`,
                 data: usersDataUniform.map(userData => userData.wins),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.3)',
@@ -55,7 +55,7 @@ export const Workplace = () => {
                 tension: 0.2,
             },
             {
-                label: 'Distribution with corrections',
+                label: `Distribution with corrections (diff: ${Math.max(...usersDataCorrection.map(userData => userData.wins)) - Math.min(...usersDataCorrection.map(userData => userData.wins))})`,
                 data: usersDataCorrection.map(userData => userData.wins),
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.3)',

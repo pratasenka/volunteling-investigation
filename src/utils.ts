@@ -84,7 +84,8 @@ export const findWinners = (
     usersDataCorrection: UserData[],
     usersDataUniform: UserData[]
 ) => {
-    const borderedRandomValue = getRandomArbitrary(0, 1);
+    // const borderedRandomValue = getRandomArbitrary(0, 1);
+    const borderedRandomValue = getUniformRandom();
 
     return [
         findWinnerCorrection(usersDataCorrection, borderedRandomValue),
