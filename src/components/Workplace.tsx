@@ -15,7 +15,7 @@ export const Workplace = () => {
     const [users, setUsers] = useState(5);
     const [wins, setWins] = useState(10);
     const [rounds, setRounds] = useState(90);
-    const [cycles, setCycles] = useState(10000);
+    const [cycles, setCycles] = useState(100);
 
     const usersDataCorrection: UserData[] = [];
     const usersDataUniform: UserData[] = [];
